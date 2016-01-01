@@ -1,7 +1,6 @@
 package com.mounacheikhna.rxjavaextensions;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import rx.Observable;
 import rx.Observable.Transformer;
@@ -13,6 +12,18 @@ import rx.functions.Func1;
  * Created by cheikhnamouna on 11/11/15.
  */
 public final class Transformers {
+
+  /**
+   * Converts a transformer to an operator
+   * @param function Transformer
+   * @param <T>
+   * @param <R>
+   * @return An operator for observables.
+   */
+  public static <T, R> Observable.Operator<R, T> toOperator(
+      Func1<? super Observable<T>, ? extends Observable<R>> function) {
+    return OperatorFromTransformer.toOperator(function);
+  }
 
   /**
    * Returns an Observable that emits a single item, a set composed of all items emitted by the
